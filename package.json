@@ -1,6 +1,6 @@
 {
   "name": "gherkin-js-util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilities processing feature files",
   "main": "lib/index.js",
   "scripts": {
