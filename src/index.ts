@@ -7,28 +7,26 @@ import  tag_expression_parser  from 'cucumber-tag-expressions';
 import AstBuilder from 'gherkin/dist/src/AstBuilder';
 
 /**
- * Check if a feature file matches the given tagExpression
- * @param path The path of a feature file
- * @param source The content of the feature file
+ * Check if a feature contents matches the given tagExpression
+ * @param contents The content of the feature file
  * @param tagExpression The tags that the feature file to match
- * @returns true if the feature file matches the tagExpression, otherwise false
+ * @returns true if the feature contents matches the tagExpression, otherwise false
  */
-export const featureMatchesTags = (path: string, source:string, tagExpression: string) => {
-    const parser = new Parser(new AstBuilder(messages.IdGenerator.incrementing()));
-    const gherkinDocument : messages.GherkinDocument = parser.parse(source);
+export const featureContentsMatchesTags = (contents:string, tagExpression: string) => {
+    const gherkinParser = new Parser(new AstBuilder(messages.IdGenerator.incrementing()));
+    const gherkinDocument : messages.GherkinDocument = gherkinParser.parse(contents);
 
-
-    const featureTags = gherkinDocument.feature!.tags.map(t => t.name);
+    const featureLevelTags = gherkinDocument.feature!.tags.map(t => t.name);
     for (const child of gherkinDocument.feature!.children) {
         if (child.scenario) {
             const scenarioLevelTags = child.scenario.tags.map((t) => t.name);
 
             const flattened = (array:any) => [].concat(...array);
-            const exampleTags = (child.scenario.examples) ?
+            const exampleLevelTags = (child.scenario.examples) ?
                 flattened(child.scenario.examples.map(example => example.tags.map(tag => tag.name))) :
                 [];
 
-            const combinedTags = _.union(scenarioLevelTags, featureTags, exampleTags);
+            const combinedTags = _.union(featureLevelTags, scenarioLevelTags, exampleLevelTags);
 
 
             const tagExpressionNode = tag_expression_parser(tagExpression || '');
@@ -39,6 +37,16 @@ export const featureMatchesTags = (path: string, source:string, tagExpression: s
     }
 
     return false;
+}
+
+/**
+ * Check if a feature file matches the given tagExpression
+ * @param path The path of the feature file
+ * @param tagExpression The tags that the feature file to match
+ * @returns true if the feature file matches the tagExpression, otherwise false
+ */
+export const featureFileMatchesTags = (path:string, tagExpression: string) => {
+    return featureContentsMatchesTags(fs.readFileSync(path, 'utf-8'), tagExpression);
 }
 
 /**

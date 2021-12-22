@@ -1,8 +1,8 @@
 {
-  "name": "gherkin-js-matcher",
+  "name": "gherkin-js-util",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
