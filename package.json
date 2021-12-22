@@ -18,15 +18,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wenzhhu/gherkin-js-matcher.git"
+    "url": "git+https://github.com/wenzhhu/gherkin-js-util.git"
   },
   "keywords": [],
   "author": "Wenzhong Hu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wenzhhu/gherkin-js-matcher/issues"
+    "url": "https://github.com/wenzhhu/gherkin-js-util/issues"
   },
-  "homepage": "https://github.com/wenzhhu/gherkin-js-matcher#readme",
+  "homepage": "https://github.com/wenzhhu/gherkin-js-util#readme",
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
