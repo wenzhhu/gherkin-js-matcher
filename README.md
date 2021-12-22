@@ -10,7 +10,7 @@ NPM package for utilities processing feature files ([cucumber](https://cucumber.
 ## Usage
 
 ```
-const { featureFileMatchesTags } = require('gherkin-js-matcher');
+const { featureFileMatchesTags } = require('gherkin-js-util');
 
 featureFileMatchesTags("./some/feature.file", "@tag1 and @tag2");
 ```
